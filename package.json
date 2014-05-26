@@ -1,0 +1,19 @@
+{
+	"name": "smsaero",
+	"version": "0.1.0-stub",
+	"main": "./lib/index",
+	"author": {
+		"name": "Vladimir Andreev",
+		"email": "volodya@netfolder.ru"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/tucan/smsaero.git"
+	},
+	"devDependencies": {
+		"coffee-script": "1.x"
+	},
+	"scripts": {
+		"prepublish": "./node_modules/.bin/coffee -c -b -o lib src"
+	}
+}
