@@ -1,7 +1,9 @@
 {
 	"name": "smsaero",
 	"version": "0.1.0-stub",
+	"description": "SMSAero client",
 	"main": "./lib/index",
+	"license": "MIT",
 	"author": {
 		"name": "Vladimir Andreev",
 		"email": "volodya@netfolder.ru"
@@ -9,6 +11,10 @@
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/tucan/smsaero.git"
+	},
+	"dependencies": {
+		"qs": "0.x",
+		"iconv-lite": "0.x"
 	},
 	"devDependencies": {
 		"coffee-script": "1.x"
