@@ -1,0 +1,36 @@
+#! /usr/bin/env coffee
+
+# Required modules
+
+Util = require('util')
+Aero = require('..')
+
+# Check provided CLI args
+
+unless process.argv.length is 4
+	programName = process.argv[1].match(/[^/]+$/)[0]
+
+	console.log('Displays account balance')
+	console.log('Usage: ' + programName + ' USER_NAME PASSWORD')
+
+	process.exit()
+
+#
+
+user = process.argv[2]
+password = process.argv[3]
+
+# Create client with specified username and password
+
+service = new Aero.Service(new Aero.Client(user: user, password: password))
+
+# And invoke remote method
+
+service.accountBalance((error, balance) ->
+	unless error?
+		console.log(Util.inspect(balance, depth: null, colors: true))
+	else
+		console.log(error)
+
+	return
+)
