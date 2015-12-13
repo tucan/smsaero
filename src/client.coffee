@@ -18,7 +18,7 @@ class Client
 
 	SERVER_NAME = 'gate.smsaero.ru'
 
-	SERVER_COMMON_PORT = 80
+	SERVER_PLAIN_PORT = 80
 	SERVER_SECURE_PORT = 443
 
 	# Request and response default parameters
@@ -32,8 +32,10 @@ class Client
 
 		@_proto = options.proto ? SERVER_PROTO
 
+		@_HTTP = if @_proto is 'http' then HTTP else HTTPS
+
 		@_host = options.host ? SERVER_NAME
-		@_port = options.port ? if @_proto is 'http' then SERVER_COMMON_PORT else SERVER_SECURE_PORT
+		@_port = options.port ? if @_proto is 'http' then SERVER_PLAIN_PORT else SERVER_SECURE_PORT
 
 		@_charset = options.charset ? REQUEST_CHARSET
 
@@ -49,17 +51,10 @@ class Client
 			'Content-Type': 'application/x-www-form-urlencoded; charset=' + @_charset
 			'Content-Length': blob.length
 
-		# Merge const headers and request specific headers
-
-		fullHeaders = Object.create(null)
-
-		fullHeaders[key] = value for key, value of @_headers
-		fullHeaders[key] = value for key, value of headers
-
 		options =
 			host: @_host, port: @_port
 			method: 'POST', path: path
-			headers: fullHeaders
+			headers: headers
 
 		options
 
@@ -123,8 +118,7 @@ class Client
 
 		# Create request using generated options
 
-		Module = if @_proto is 'http' then HTTP else HTTPS
-		request = Module.request(@_requestOptions(name, blob))
+		request = @_HTTP.request(@_requestOptions(name, blob))
 
 		# Assign necessary event handlers
 
