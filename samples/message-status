@@ -17,11 +17,11 @@ unless process.argv.length is 5
 
 #
 
-[user, password, id] = process.argv[2..4]
+[userName, password, id] = process.argv[2..4]
 
 # Create client with specified username and password
 
-service = new Aero.Service(new Aero.Client(user: user, password: password))
+service = new Aero.Service(userName: userName, password: password)
 
 # And invoke remote method
 

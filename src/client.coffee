@@ -39,7 +39,7 @@ class Client
 
 		@_charset = options.charset ? REQUEST_CHARSET
 
-		@_user = options.user
+		@_userName = options.userName
 		@_hash = Crypto.createHash('md5').update(options.password).digest('hex')
 
 	# Generates request options based on provided parameters
@@ -107,7 +107,7 @@ class Client
 		fullInput = Object.create(null)
 
 		fullInput.answer = 'json'
-		fullInput.user = @_user
+		fullInput.user = @_userName
 		fullInput.password = @_hash
 
 		fullInput[key] = value for key, value of input

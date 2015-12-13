@@ -1,12 +1,16 @@
 # Copyright Vladimir Andreev
 
-#
+# Required modules
+
+Client = require('./client')
+
+# SMSAero Service
 
 class Service
 	# Object constructor
 
-	constructor: (client) ->
-		@_client = client
+	constructor: (options) ->
+		@_client = new Client(userName: options.userName, password: options.password)
 
 	#
 
